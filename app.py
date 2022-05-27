@@ -22,9 +22,9 @@ def main():
     app.register_blueprint(project_add)
     app.register_blueprint(project_edit)
 
-    # Run app
-    app.run()
+    return app
 
 
 if __name__ == "__main__":
-    main()
+    # Run app
+    main().run()
