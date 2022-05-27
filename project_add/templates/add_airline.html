@@ -1,0 +1,39 @@
+{% extends 'add_base.html' %}
+
+{% block add_content_container %}
+
+    <div class="form-container col-12 d-flex flex-column">
+        <div class="form-title mb-2">Add Airline Info</div>
+        <form method="POST">
+
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column col-3">
+
+                    <div class="p-2">
+                        <label for="AddID" class="form-label input-label">ID</label>
+                        <input name="id" id="AddID" placeholder="AA" class="form-control input-field
+                               {% if validation_result %}
+                                    {% if validation_result['id'] %}is-invalid{% else %}is-valid{% endif %}
+                               {% endif %}" value="{% if data['id'] %}{{ data['id'] }}{% endif %}">
+                        <div class="invalid-feedback">{{ validation_result['id'] }}</div>
+                    </div>
+                    <div class="p-2">
+                        <label for="AddName" class="form-label input-label">Name</label>
+                        <input name="name" id="AddName" placeholder="Airline" class="form-control input-field
+                               {% if validation_result %}
+                                    {% if validation_result['name'] %}is-invalid{% else %}is-valid{% endif %}
+                               {% endif %}" value="{% if data['name'] %}{{ data['name'] }}{% endif %}">
+                        <div class="invalid-feedback">{{ validation_result['name'] }}</div>
+                    </div>
+                    <div class="my-4 d-flex justify-content-center">
+                        <button type="submit" class="submit-button btn col-4">Add</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content_container %}
+
+    {% if data %}
+
+        <div class="form-container col-12 d-flex flex-column">
+            <div class="form-title mb-2 mt-4">Edit Flight Info</div>
+            <form method="POST">
+
+                <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column col-3">
+
+                        <div class="p-2">
+                            <label for="AddID" class="form-label input-label">ID</label>
+                            <input name="id" id="AddID" class="form-control form-control-plaintext"
+                                       value="{{ data['id'] }}" readonly>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddAirlineID" class="form-label input-label">Airline ID</label>
+                            <input name="airline_id" id="AddAirlineID" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['airline_id'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['airline_id'] %}{{ data['airline_id'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['airline_id'] }}</div>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddFlightNumber" class="form-label input-label">Flight Number</label>
+                            <input name="flight_number" id="AddFlightNumber" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['flight_number'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['flight_number'] %}{{ data['flight_number'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['flight_number'] }}</div>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddTailNumber" class="form-label input-label">Tail Number</label>
+                            <input name="tail_number" id="AddTailNumber" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['tail_number'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['tail_number'] %}{{ data['tail_number'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['tail_number'] }}</div>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddRouteID" class="form-label input-label">Route ID</label>
+                            <input name="route_id" id="AddRouteID" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['route_id'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['route_id'] %}{{ data['route_id'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['route_id'] }}</div>
+                        </div>
+                        <div class="my-4 d-flex justify-content-center">
+                            <button type="submit" name="edit_id" value="{{ data.id }}" class="submit-button btn col-4">Save</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    {% else %}
+
+        {% include 'empty_result.html' %}
+
+    {% endif %}
+
+{% endblock %}

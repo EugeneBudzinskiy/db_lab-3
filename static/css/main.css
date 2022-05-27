@@ -1,0 +1,210 @@
+:root {
+    --bs-white-100: #f4f5f6;
+    --bs-white-200: #cbd2df;
+    --bs-white-300: #8a8f98;
+    --bs-dark-100: #050505;
+    --bs-dark-200: #0f0f0f;
+    --bs-dark-300: #22272f;
+    --bs-blue-100: #167dff;
+    --bs-blue-200: #1669d2;
+    --bs-body-color: var(--bs-white-100);
+    --bs-body-bg: var(--bs-dark-100);
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.main {
+    height: 100%;
+}
+
+.content {
+    background-color: var(--bs-dark-200);
+}
+
+.navbar {
+    color: var(--bs-white-100);
+}
+
+.navbar-brand {
+    font-size: 28px;
+}
+
+.nav-link {
+    color: var(--bs-white-300);
+    font-size: 18px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    border-bottom-width: 1px;
+}
+
+.nav-link:hover {
+    color: var(--bs-white-100);
+    border-bottom-color: var(--bs-white-100);
+}
+
+.submit-button, .submit-button:hover {
+    border-color: transparent;
+    background-color: var(--bs-blue-100);
+    color: var(--bs-white-100);
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+.submit-button:hover {
+    background-color: var(--bs-blue-200);
+}
+
+.form-control[readonly],
+.form-control[readonly]:hover,
+.form-control[readonly]:focus {
+    background: var(--bs-dark-200);
+    border-color: var(--bs-white-300);
+    box-shadow: none;
+    color: var(--bs-white-100);
+    padding-left: .75rem;
+    padding-right: .75rem;
+    border-width: 1px;
+}
+
+.input-field {
+    background: var(--bs-dark-200);
+    color: var(--bs-white-100);
+    border-color: var(--bs-white-300);
+    box-shadow: none;
+}
+
+.input-field:focus {
+    background: var(--bs-dark-200);
+    border-color: var(--bs-blue-100);
+    color: var(--bs-white-100);
+}
+
+.input-field:hover {
+    background: var(--bs-dark-300);
+    border-color: var(--bs-white-100);
+    cursor: pointer;
+}
+
+.input-field:focus:hover{
+    border-color: var(--bs-blue-100);
+}
+
+.input-label {
+    color: var(--bs-white-300);
+    font-size: 14px;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.footer-text {
+    color: var(--bs-white-300);
+}
+
+.result-table > tbody > tr > *, .result-table > thead > tr > * {
+    background-color: transparent;
+}
+
+.result-table > tbody > *, .result-table > thead > * {
+    border-bottom-color: var(--bs-white-300);
+}
+
+.result-table > tbody > tr:hover {
+    background-color: var(--bs-dark-300);
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.search-row {
+    font-size: 16px;
+    border-style: solid;
+    border-color: var(--bs-white-300);
+    border-radius: 6px;
+    border-width: 1px;
+}
+
+.search-row:hover {
+    background-color: var(--bs-dark-300);
+    border-color: var(--bs-white-100);
+}
+
+.search-row .flight-id {
+    font-size: 16px;
+}
+
+.search-row .title {
+    font-size: 16px;
+    color: var(--bs-white-300);
+}
+
+.search-row .airport .data {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.search-row .airport .data-full {
+    font-size: 16px;
+}
+
+.search-row .airline .data {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.page-item:first-child .page-link {
+    border-left-style: solid;
+}
+
+.page-item:last-child .page-link {
+    border-right-style: solid;
+}
+
+.page-item:not(:first-child) .page-link {
+    margin: 0;
+}
+
+.page-link {
+    background-color: var(--bs-dark-200);
+    color: var(--bs-white-100);
+    border-color: var(--bs-white-300);
+    border-right-style: none;
+    border-left-style: none;
+}
+
+.page-link:hover {
+    background-color: var(--bs-dark-300);
+    color: var(--bs-white-100);
+}
+
+.page-link:hover. {
+    background-color: var(--bs-dark-300);
+    color: var(--bs-white-100);
+}
+
+.page-link-disabled, .page-link-disabled:hover {
+    color: var(--bs-white-300);
+    pointer-events: none;
+}
+
+.page-link-active, .page-link-active:hover {
+    background-color: var(--bs-blue-100);
+    border-color: var(--bs-blue-100)
+}
+
+.page-link-dots {
+    pointer-events: none;
+}
+
+.empty-result {
+    font-size: 30px;
+    font-weight: 600;
+}

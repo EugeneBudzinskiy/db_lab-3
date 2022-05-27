@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content_container %}
+
+    <div class="d-flex justify-content-center py-5 mb-5 border-bottom border-white">
+        <div class="d-flex col-12 justify-content-center">
+            <a href="/add-flight" type="button" class="col-2 submit-button btn mx-3 py-2">Add Flight</a>
+            <a href="/add-route" type="button" class="col-2 submit-button btn mx-3 py-2">Add Route</a>
+            <a href="/add-airport" type="button" class="col-2 submit-button btn mx-3 py-2">Add Airport</a>
+            <a href="/add-airline" type="button" class="col-2 submit-button btn mx-3 py-2">Add Airline</a>
+        </div>
+    </div>
+
+    <div class="add-content">
+        {% block add_content_container %} {% endblock %}
+    </div>
+
+{% endblock %}

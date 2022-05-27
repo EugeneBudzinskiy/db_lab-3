@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content_container %}
+
+    {% if data %}
+
+        <div class="form-container col-12 d-flex flex-column">
+            <div class="form-title mb-2 mt-4">Edit Airport Info</div>
+            <form method="POST">
+
+                <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column col-3">
+
+                        <div class="p-2">
+                            <label for="AddID" class="form-label input-label">ID</label>
+                            <input name="id" id="AddID" class="form-control form-control-plaintext"
+                                   value="{{ data['id'] }}" readonly>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddName" class="form-label input-label">Name</label>
+                            <input name="name" id="AddName" placeholder="Airline" class="form-control input-field
+                                   {% if validation_result %}
+                                        {% if validation_result['name'] %}is-invalid{% else %}is-valid{% endif %}
+                                   {% endif %}" value="{% if data['name'] %}{{ data['name'] }}{% endif %}">
+                            <div class="invalid-feedback">{{ validation_result['name'] }}</div>
+                        </div>
+                        <div class="my-4 d-flex justify-content-center">
+                            <button type="submit" name="edit_id" value="{{ data.id }}" class="submit-button btn col-4">Save</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    {% else %}
+
+        {% include 'empty_result.html' %}
+
+    {% endif %}
+
+{% endblock %}

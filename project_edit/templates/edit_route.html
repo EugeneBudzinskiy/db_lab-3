@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content_container %}
+
+    {% if data %}
+
+        <div class="form-container col-12 d-flex flex-column">
+            <div class="form-title mb-2 mt-4">Edit Route Info</div>
+            <form method="POST">
+
+                <div class="d-flex justify-content-center">
+                    <div class="d-flex flex-column col-3">
+
+                        <div class="p-2">
+                            <label for="AddID" class="form-label input-label">ID</label>
+                            <input name="id" id="AddID" class="form-control form-control-plaintext"
+                                       value="{{ data['id'] }}" readonly>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddOriginAirport" class="form-label input-label">Origin Airport</label>
+                            <input name="origin_airport" id="AddOriginAirport" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['origin_airport'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['origin_airport'] %}{{ data['origin_airport'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['origin_airport'] }}</div>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddDestinationAirport" class="form-label input-label">Destination Airport</label>
+                            <input name="destination_airport" id="AddDestinationAirport" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['destination_airport'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['destination_airport'] %}{{ data['destination_airport'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['destination_airport'] }}</div>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddTime" class="form-label input-label">Time</label>
+                            <input name="time" id="AddTime" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['time'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['time'] %}{{ data['time'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['time'] }}</div>
+                        </div>
+                        <div class="p-2">
+                            <label for="AddDistance" class="form-label input-label">Distance</label>
+                            <input name="distance" id="AddDistance" class="form-control input-field
+                                   {% if validation_result %}
+                                            {% if validation_result['distance'] %}is-invalid{% else %}is-valid{% endif %}
+                                       {% endif %}" value="{% if data['distance'] %}{{ data['distance'] }}{% endif %}">
+                                <div class="invalid-feedback">{{ validation_result['distance'] }}</div>
+                        </div>
+                        <div class="my-4 d-flex justify-content-center">
+                            <button type="submit" name="edit_id" value="{{ data.id }}" class="submit-button btn col-4">Save</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    {% else %}
+
+        {% include 'empty_result.html' %}
+
+    {% endif %}
+
+{% endblock %}

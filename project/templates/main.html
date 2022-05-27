@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block content_container %}
+
+    <div class="search-form mt-4 pb-5 border-bottom border-white">
+        <form method="GET">
+            <div class="form-inner d-flex justify-content-around align-items-end">
+                <div class="col-2">
+                    <label for="searchFlightID" class="form-label input-label">Flight ID</label>
+                    <input name="flight_id" class="form-control input-field" id="searchFlightID" placeholder="AA-111-A1111A-AAA-AAA"
+                           value="{% if get_query_data.get('flight_id') %}{{get_query_data.get('flight_id')}}{% endif %}">
+                </div>
+                <div class="col-2">
+                    <label for="searchAirlineID" class="form-label input-label">Airline ID</label>
+                    <input name="airline_id" class="form-control input-field" id="searchAirlineID" placeholder="AA"
+                           value="{% if get_query_data.get('airline_id') %}{{get_query_data.get('airline_id')}}{% endif %}">
+                </div>
+                <div class="col-2">
+                    <label for="searchFlightNumber" class="form-label input-label">Origin Airport</label>
+                    <input name="origin_airport" class="form-control input-field" id="searchFlightNumber" placeholder="AAA"
+                           value="{% if get_query_data.get('origin_airport') %}{{get_query_data.get('origin_airport')}}{% endif %}">
+                </div>
+                <div class="col-2">
+                    <label for="searchTailNumber" class="form-label input-label">Destination Airport</label>
+                    <input name="destination_airport" class="form-control input-field" id="searchTailNumber" placeholder="BBB"
+                           value="{% if get_query_data.get('destination_airport') %}{{get_query_data.get('destination_airport')}}{% endif %}">
+                </div>
+                <div class="col-1 d-flex justify-content-center">
+                    <button type="submit" class="submit-button btn px-4">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if data.items %}
+
+        <div class="search-content d-flex flex-column mt-5 flex-grow-1">
+
+            {% for row in data.items %}
+
+                <div class="search-row p-3 mb-4">
+                    <div class="search-row-inner d-flex flex-column">
+
+                        <div class="col-12 d-flex pb-3 align-items-center">
+                            <div class="airline col-4 d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <div class="title me-2">Airline ID:</div>
+                                    <div class="data">{{ row.Airline.id }}</div>
+                                </div>
+                                <div class="data-full">{{ row.Airline.name }}</div>
+                            </div>
+                            <div class="airport col-4 d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <div class="title me-2">Origin Airport:</div>
+                                    <div class="data">{{ row.OriginAirport.id }}</div>
+                                </div>
+                                <div class="data-full">{{ row.OriginAirport.name }}</div>
+                            </div>
+                            <div class="airport col-4 d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <div class="title me-2">Destination Airport:</div>
+                                    <div class="data">{{ row.DestinationAirport.id }}</div>
+                                </div>
+                                <div class="data-full">{{ row.DestinationAirport.name }}</div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 d-flex">
+                            <div class="flight-id col-4 d-flex align-items-center">
+                                <div class="title me-2">Flight ID:</div>
+                                <div class="data">{{ row.Flight.id }}</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="flight-number d-flex align-items-center">
+                                    <div class="title me-2">Flight Number:</div>
+                                    <div class="data">{{ row.Flight.flight_number }}</div>
+                                </div>
+                                <div class="tail-number d-flex align-items-center">
+                                    <div class="title me-2">Tail Number:</div>
+                                    <div class="data">{{ row.Flight.tail_number }}</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="time d-flex align-items-center">
+                                    <div class="title me-2">Time:</div>
+                                    <div class="data">{{ row.Route.time }}<span class="prefix ms-1">min</span></div>
+                                </div>
+                                <div class="distance d-flex align-items-center">
+                                    <div class="title me-2">Distance:</div>
+                                    <div class="data">{{ row.Route.distance }}<span class="prefix ms-1">km</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="search-nav d-flex justify-content-center my-3">
+            <nav>
+                <ul class="pagination mb-0">
+                    <li class="page-item">
+                        <a href="{{ url_for('project.main',
+                                    page=data.prev_num,
+                                    flight_id=get_query_data.get('flight_id', ''),
+                                    airline_id=get_query_data.get('airline_id', ''),
+                                    origin_airport=get_query_data.get('origin_airport', ''),
+                                    destination_airport=get_query_data.get('destination_airport', '')) }}"
+                           class="page-link {% if data.page == 1 %}page-link-disabled{% endif %}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    {% for page_num in data.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+                        {% if page_num %}
+
+                            <li class="page-item">
+                                <a href="{{ url_for('project.main',
+                                            page=page_num,
+                                            flight_id=get_query_data.get('flight_id', ''),
+                                            airline_id=get_query_data.get('airline_id', ''),
+                                            origin_airport=get_query_data.get('origin_airport', ''),
+                                            destination_airport=get_query_data.get('destination_airport', '')) }}"
+                                   class="page-link {% if data.page == page_num %}page-link-active{% endif %}">
+                                    {{ page_num }}
+                                </a>
+                            </li>
+
+                        {% else %}
+
+                            <li class="page-item"><div class="page-link page-link-dots">...</div></li>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <li class="page-item">
+                        <a href="{{ url_for('project.main',
+                                             page=data.next_num,
+                                             flight_id=get_query_data.get('flight_id', ''),
+                                             airline_id=get_query_data.get('airline_id', ''),
+                                             origin_airport=get_query_data.get('origin_airport', ''),
+                                             destination_airport=get_query_data.get('destination_airport', '')) }}"
+                           class="page-link {% if data.page == data.pages %}page-link-disabled{% endif %}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    {% else %}
+
+        {% include 'empty_result.html' %}
+
+    {% endif %}
+
+{% endblock %}

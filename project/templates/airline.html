@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block content_container %}
+
+    <div class="search-form mt-4 pb-5 border-bottom border-white">
+        <form method="GET">
+            <div class="form-inner d-flex justify-content-around align-items-end">
+                <div class="col-2">
+                    <label for="searchID" class="form-label input-label">ID</label>
+                    <input name="id" class="form-control input-field" id="searchID" placeholder="AA"
+                           value="{% if get_query_data.get('id') %}{{get_query_data.get('id')}}{% endif %}">
+                </div>
+                <div class="col-5">
+                    <label for="searchName" class="form-label input-label">Name</label>
+                    <input name="name" class="form-control input-field" id="searchName" placeholder="Airline"
+                           value="{% if get_query_data.get('name') %}{{get_query_data.get('name')}}{% endif %}">
+                </div>
+                <div class="col-1 d-flex justify-content-center">
+                    <button type="submit" class="submit-button btn px-4">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if data.items %}
+
+        <div class="search-content d-flex flex-column mt-5 flex-grow-1">
+
+            <table class="table table-dark result-table">
+                <thead>
+                    <tr class="align-middle">
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for row in data.items %}
+
+                        <tr class="align-middle">
+                            <th scope="row">{{ (data.page - 1) * data.per_page + loop.index }}</th>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.name }}</td>
+                            <td class="d-flex">
+                                <a href="{{ url_for('project_edit.edit_airline', id=row.id) }}" type="button" class="btn btn-outline-success me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-pencil" viewBox="0 0 16 16">
+                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5
+                                            0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207
+                                            2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4
+                                            9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761
+                                            5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5
+                                            0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                    </svg>
+                                </a>
+                                <form method="POST">
+                                    <button type="submit" name="delete_id" value="{{ row.id }}" class="btn btn-outline-danger">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                             class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5
+                                                0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0
+                                                0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2
+                                                2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1
+                                                0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1
+                                                0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="search-nav d-flex justify-content-center my-3">
+            <nav>
+                <ul class="pagination mb-0">
+                    <li class="page-item">
+                        <a href="{{ url_for('project.airline',
+                                             page=data.prev_num,
+                                             id=get_query_data.get('id', ''),
+                                             name=get_query_data.get('name', '')) }}"
+                           class="page-link {% if data.page == 1 %}page-link-disabled{% endif %}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    {% for page_num in data.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+                        {% if page_num %}
+
+                            <li class="page-item">
+                                <a href="{{ url_for('project.airline',
+                                                     page=page_num,
+                                                     id=get_query_data.get('id', ''),
+                                                     name=get_query_data.get('name', '')) }}"
+                                   class="page-link {% if data.page == page_num %}page-link-active{% endif %}">
+                                    {{ page_num }}
+                                </a>
+                            </li>
+                        {% else %}
+
+                            <li class="page-item"><div class="page-link page-link-dots">...</div></li>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    <li class="page-item">
+                        <a href="{{ url_for('project.airline',
+                                             page=data.next_num,
+                                             id=get_query_data.get('id', ''),
+                                             name=get_query_data.get('name', '')) }}"
+                           class="page-link {% if data.page == data.pages %}page-link-disabled{% endif %}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    {% else %}
+
+        {% include 'empty_result.html' %}
+
+    {% endif %}
+
+{% endblock %}
