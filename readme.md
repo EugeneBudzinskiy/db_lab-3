@@ -1,6 +1,6 @@
 ## Project Example
 
-Copy of this project are located on [Heroku](https://www.kaggle.com/).
+Copy of this project are located on [Heroku](https://flight-data-project.herokuapp.com/).
 
 ---
 
@@ -46,7 +46,7 @@ In this project data for database based on this [dataset](https://www.kaggle.com
 3. Make sure that Python 3.7+ was installed.
 
 
-4. Make sure that Git was installed.
+4. Make sure that Git was installed and log in.
 
 
 5. Make sure that Heroku CLI was installed and log in.
@@ -65,7 +65,7 @@ In this project data for database based on this [dataset](https://www.kaggle.com
        git init
        heroku git:clone -a flight-data-project
        git add . 
-       git commit "Initial commit"
+       git commit -m "Initial commit"
        git push heroku master
 
 ---
