@@ -19,11 +19,11 @@ In this project data for database based on this [dataset](https://www.kaggle.com
 
 ##### [config.py](config.py)
 
-    username - Username to use for connection to database
-    password - Password to use for connection to database
-    database - Name of database to connect
-    host - Host of database to connect
-    port - Port of database to connect
+    username - Username to use for connection to database in Development mode
+    password - Password to use for connection to database in Development mode
+    database - Name of database to connect in Development mode
+    host - Host of database to connect in Development mode
+    port - Port of database to connect in Development mode
 
     Config - Class with hyperparameters for application
     DevelopmentConfig - Class derived from Config. Hyperparameters for Development mode
@@ -54,16 +54,16 @@ In this project data for database based on this [dataset](https://www.kaggle.com
 
 6. Create app on heroku with following command:
 
-       heroku create flight-data-project
+       heroku create `project-name`
 
 7. Create postgres database on heroku with following command:
 
-       heroku addons:create heroku-postgresql:hobby-dev --app flight-data-project
+       heroku addons:create heroku-postgresql:hobby-dev --app `project-name`
 
 8. Deploy project with following commands:
 
        git init
-       heroku git:clone -a flight-data-project
+       heroku git:clone -a `project-name`
        git add . 
        git commit -m "Initial commit"
        git push heroku master
