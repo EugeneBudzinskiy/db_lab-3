@@ -63,7 +63,7 @@ In this project data for database based on this [dataset](https://www.kaggle.com
 8. Deploy project with following commands:
 
        git init
-       heroku git:clone -a `project-name`
+       heroku git:remote -a `project-name`
        git add . 
        git commit -m "Initial commit"
        git push heroku master
